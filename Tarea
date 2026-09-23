@@ -1,31 +1,40 @@
-public class SimpleLinearRegression {
+public class RegresionLinealSimple {
     public static void main(String[] args) {
 
-        // Data Set
         double[] x = {23, 26, 30, 34, 43, 48, 52, 57};
         double[] y = {651, 762, 856, 1063, 1190, 1298, 1421, 1440};
 
         int n = x.length;
 
-        // Summations
-        double sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
+        double sumaX = 0;
+        double sumaY = 0;
+        double sumaXY = 0;
+        double sumaX2 = 0;
+
         for (int i = 0; i < n; i++) {
-            sumX += x[i];
-            sumY += y[i];
-            sumXY += x[i] * y[i];
-            sumX2 += x[i] * x[i];
+            sumaX += x[i];
+            sumaY += y[i];
+            sumaXY += x[i] * y[i];
+            sumaX2 += x[i] * x[i];
         }
 
-        // Calculate beta_1 (regression coefficient) and beta_0 (intercept)
-        double beta1 = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
-        double beta0 = (sumX2 * sumY - sumX * sumXY) / (n * sumX2 - sumX * sumX);
+        double beta1 = (n * sumaXY - sumaX * sumaY)
+                / (n * sumaX2 - sumaX * sumaX);
 
-        // Regression equation
-        System.out.printf("Regression equation: y = %.2f + %.2fx\n", beta0, beta1);
+        double beta0 = (sumaX2 * sumaY - sumaX * sumaXY)
+                / (n * sumaX2 - sumaX * sumaX);
 
-        // Specific prediction of x
-        double xPred = 57.5;
-        double yPred = beta0 + beta1 * xPred;
-        System.out.printf("\nFor x = %.2f, the prediction for y is: %.2f\n", xPred, yPred);
+        System.out.printf(
+                "Ecuacion de regresion: y = %.2f + %.2fx\n",
+                beta0, beta1
+        );
+
+        double xPrediccion = 57.5;
+        double yPrediccion = beta0 + beta1 * xPrediccion;
+
+        System.out.printf(
+                "\nPara x = %.2f, la prediccion de y es: %.2f\n",
+                xPrediccion, yPrediccion
+        );
     }
 }
